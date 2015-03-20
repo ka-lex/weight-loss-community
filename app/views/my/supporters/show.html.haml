@@ -1,0 +1,53 @@
+- title "Profil von #{@user.username}" 
+
+- if @user.setting.show_weight?
+  #weights_chart{:style => "width: 750px;height: 300px;"}
+
+#content
+  .wrapper
+    - if user_signed_in?
+      - unless @user.friend_with? current_user
+        #{@user.username} als Unterstützer hinzufügen
+      - else
+        #message_box
+          %strong
+            = @user.username
+          Eine Private Nachricht schicken
+          = link_to new_my_conversation_path(:to_user => @user.id) do
+            = image_tag 'nachrichten.png', :weight => 20, :height => 20
+    -else
+      Um #{@user.username} als Unterstützer hinzuzufügen musst Du Dich
+      = link_to 'einloggen', new_user_session_url
+      \.
+    %br.clearall
+
+    - if user_signed_in? && @user == current_user
+      %p
+        = link_to "Privatsphäre ansehen / bearbeiten", edit_setting_path
+
+  .wrapper
+    %h2 Status
+    %p
+      #{@user.username} eine Nachricht hinterlassen
+      = form_for @pinboard_message do |f|
+        = f.hidden_field :from_user_id
+        = f.hidden_field :to_user_id
+        = f.text_field :body, :class => "wide_textfield"
+        = f.submit "Posten", :onClick => ("_gaq.push(['_trackEvent', 'Ticker', 'New Posting', '" + @user.friendly_id + "']);"), :class => "submit_button"
+
+    %h2 Ticker
+    - @tickers.each do |ticker|
+      %p.ticker
+        = link_to_user_account ticker.user
+        %strong
+          = ticker.event
+          %i
+            %span#timestamp
+              vor
+              = ticker.since
+
+
+
+
+
+= render :partial => "/shared/chart", :locals => {:user => @user} if @user.has_target? && @user.has_weight?

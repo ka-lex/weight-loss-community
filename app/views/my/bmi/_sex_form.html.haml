@@ -1,0 +1,32 @@
+= form_for([:my, current_account]) do |f|
+  - if @user.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@user.account.errors.count, "error")
+        prohibited this group from being saved:
+
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li
+            = msg
+
+  %fieldset.last
+    %legend Um Dein BMI zu errechnen bitte Dein Geschlecht angeben.
+    %table.formtable
+      %tbody
+        %tr
+          %th
+            = f.label :sex, 'Geschlecht'
+          %td
+            = f.radio_button(:sex, "w")
+            = f.label(:sex_w, "weiblich")
+            = f.radio_button(:sex, "m")
+            = f.label(:sex_m, "männlich")
+          %td
+    %table.formtablesubmit
+      %tbody
+        %tr
+          %th
+          %td
+            = f.submit "Geschlecht speichern", :class => "btn btn-primary"
+          %td

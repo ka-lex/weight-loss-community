@@ -1,0 +1,25 @@
+<h1>Listing my_group_comments</h1>
+
+<table>
+  <tr>
+    <th>Content</th>
+    <th>Group member</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @my_group_comments.each do |my_group_comment| %>
+  <tr>
+    <td><%= my_group_comment.content %></td>
+    <td><%= my_group_comment.group_member_id %></td>
+    <td><%= link_to 'Show', my_group_comment %></td>
+    <td><%= link_to 'Edit', edit_my_group_comment_path(my_group_comment) %></td>
+    <td><%= link_to 'Destroy', my_group_comment, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Group comment', new_my_group_comment_path %>

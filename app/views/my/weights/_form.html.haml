@@ -1,0 +1,54 @@
+- content_for :header do
+  <!-- include the Tools -->
+  <script src="http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js"></script>
+  <!-- dateinput styling -->
+  <link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/demos/dateinput/css/skin1.css"/>
+
+- @weight = Weight.new if @weight.nil?
+
+= form_for([:my, @weight]) do |f|
+  - if @weight.errors.any?
+    #error_explanation
+      %h2
+        = @weight.errors.count
+        Fehler beim speichern
+    
+    %ul
+      - @weight.errors.full_messages.each do |msg|
+        %li
+          = msg    
+
+  %fieldset.last
+    %legend Aktuelles Gewicht eintragen oder bisheriges Gewicht nachtragen.
+    %table.formtable
+      %tbody
+        %tr
+          %th 
+            = f.label :value_string, 'Gewicht'
+          %td 
+            = f.text_field :value_string, :class => "textfield"
+          %td
+
+        %tr
+          %th
+            = f.label :created_at, "Messdatum"
+          %td
+            - if @weight.created_at.nil?
+              = f.text_field :created_at, :type => "date"
+            - else
+              = f.text_field :created_at, :type => "date", :readonly => true
+          %td
+        
+    %table.formtablesubmit
+      %tbody
+        %tr
+          %th
+          %td            
+          %td
+            = f.button "Gewicht eintragen", :onClick => ("_gaq.push(['_trackEvent', 'Weight', 'New Weight', '" + @user.friendly_id + "']);"), :class => "btn"
+    
+    <script>
+    $(":date").dateinput({
+    format: 'dd.mm.yyyy'    
+    });
+    </script>

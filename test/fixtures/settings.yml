@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user: 
+  show_page: false
+  show_weight: false
+  show_target: false
+  show_weight_loss: false
+  show_chart: false
+
+two:
+  user: 
+  show_page: false
+  show_weight: false
+  show_target: false
+  show_weight_loss: false
+  show_chart: false

@@ -1,0 +1,77 @@
+- content_for :header do
+  <!-- include the Tools -->
+  <script src="http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js"></script>
+  <!-- dateinput styling -->
+  <link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/demos/dateinput/css/skin1.css"/>
+
+
+= form_for ( [:my,@target] , :validate => true)  do |f|
+
+  - if @target.errors.any?
+    #error_explanation
+      %h2
+        = @target.errors.count
+        prohibited this target from being saved:
+
+      %ul
+        - @target.errors.full_messages.each do |msg|
+          %li
+            = msg
+
+
+  %fieldset.last
+    %legend Ziel festlegen.
+    %table.formtable
+      %tbody
+        %tr
+          %th 
+            = f.label :title, 'Ziel benennen'
+          %td 
+            = f.text_field :title, :class => "textfield"
+          %td
+        %tr
+          %th 
+            = f.label :value_string, 'Ziel-Gewicht'
+          %td 
+            = f.text_field :value_string, :class => "textfield"
+          %td
+        %tr
+          %th 
+            = f.label :description, 'Beschreibung'
+          %td 
+            = f.text_field :description, :class => "textfield"
+          %td
+
+        %tr
+          %th
+            = f.label :end_date, "Wann soll das Ziel erreicht werden?"
+          %td
+            = f.text_field :end_date, :type => "date", :validate => false 
+          %td
+        
+    %table.formtablesubmit
+      %tbody
+        %tr
+          %th
+          %td
+            = f.submit "Ziel speichern", :onClick => ("_gaq.push(['_trackEvent', 'Target', 'Update/Create', '" + @user.friendly_id + "']);"), :class => "submit_button"
+          %td
+
+    <script>
+    $.tools.dateinput.localize("de",  {
+    months:        'januar, februar, märz, april, mai, juni, juli, august, september, oktober, november, dezember',
+    shortMonths:   'jan,f&eacute;v,mar,avr,mai,jun,jul,ao&ucirc;,sep,oct,nov,d&eacute;c',
+    days:          'sonntag, montag, dienstag, mittwoch, donnerstag, freitag, samstag',
+    shortDays:     'so, mo, di, mi, do, fr, sa'
+    });
+    $(":date").dateinput({
+    lang: 'de',
+    format: 'dd.mm.yyyy',
+    min: 0,                    // min selectable day (100 days backwards)
+    max: 100,                    	// max selectable day (100 days onwards)
+    offset: [10, 20],            	// tweak the position of the calendar
+    speed: 'fast',               	// calendar reveal speed
+    firstDay: 1      
+    });
+    </script>
+    

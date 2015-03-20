@@ -1,0 +1,69 @@
+
+
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+    new Highcharts.Chart({
+      chart: {
+        renderTo: "weights_chart",
+        zoomType: 'x'
+      },
+      title: {
+        text: "Gewichtsverlauf"
+      },
+      xAxis: {
+        type: "datetime"
+      },
+      yAxis: {
+        title: {
+          text: "Kilo"
+        },
+        min: <%= user.min_weight - 1%>
+      },
+      tooltip: {
+        formatter: function() {
+          return Highcharts.dateFormat("%B %e, %Y", this.x) + ': ' +
+            Highcharts.numberFormat(this.y, 2) + " kg";
+        }
+      },
+
+      plotOptions: {
+        series: {
+          cursor: 'pointer',
+          point: {
+            events: {
+              click: function() {
+                location.href = this.options.url;
+              }
+            }
+          }
+        }
+      },
+
+      series: [
+
+        {
+          name: "Gewicht",
+          pointInterval: <%= 1.day * 1000 %>,
+          pointStart: <%= 2.weeks.ago.to_i * 1000 %>,
+          data: [
+<% weights_chart_series(user , 4.weeks.ago).each do |weight| %>
+              { x: <%= weight[0].to_time.to_i*1000 %>  ,
+                y: <%= weight[1] %> ,
+                url: '<%= edit_my_weight_path weight[2]  %>'
+
+              },
+<% end %>
+          ]
+        },
+        {
+          name: "Wunschgewicht",
+          pointInterval: <%= 1.day * 1000 %>,
+          pointStart: <%= Time.now.to_i * 1000 %>,
+          data: <%= user_weights_chart_series(Date.today, user) %>
+        }
+
+
+      ]
+    });
+  });
+</script>

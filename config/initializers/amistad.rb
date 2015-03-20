@@ -1,0 +1,5 @@
+require Rails.root + 'lib/amistad-plugin/amistad/amistad/active_record/friend_model.rb'
+require 'lib/amistad-plugin/amistad/amistad/active_record/friendship_model'
+require 'lib/amistad-plugin/amistad/amistad/mongoid/friend_model'
+require 'lib/amistad-plugin/amistad/amistad/friend_model'
+require 'lib/amistad-plugin/amistad/amistad/friendship_model'

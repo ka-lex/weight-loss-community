@@ -1,0 +1,36 @@
+- noindex
+.container
+  .row
+    .span
+      %h2 Bestätigunslink erneut zusenden
+      .well
+        %p
+          Wir schicken Dir ein Link per E-Mail zu, um Deine E-Mailadresse zu bestätigen. So stellen wir sicher, dass es Deine E-Mailadresse ist.
+      .alert.alert-info
+        %p
+          %b Info
+          %i Manchmal kommt es vor, dass die Bestätigungsmail versehentlich im Spam-Ordner landet.
+      %p
+        = form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|        
+
+          %fieldset.last
+            %legend Bestätigungslink nicht erhalten?
+            %table.formtable
+              %tbody
+                %tr
+                  %th
+                    = f.label :email, "E-Mailadresse"
+                  %td
+                    = f.text_field :email, :class => "textfield"
+                  %td
+
+          %table.formtablesubmit
+            %tbody
+              %tr
+                %th
+                %td
+                  = f.submit "Bestätigunslink erneut senden",  :class => "btn btn-large btn-primary"
+                %td
+      %hr
+      = render :partial => "devise/shared/links"
+

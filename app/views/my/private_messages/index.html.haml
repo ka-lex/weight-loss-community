@@ -1,0 +1,22 @@
+#content
+  #main-wrapper
+    %h2 meine Nachrichten
+
+    %fieldset.last
+      %legend
+        alle Konversationen
+      %table.formtable
+        %tbody
+          - @messages.each do |message|
+            %tr
+              %th
+                = link_to message.subject, my_private_message_path(message)
+              %td
+                = message.body
+              %td
+                = link_to 'bearbeiten', edit_my_private_message_path(message)
+                |
+                = link_to 'löschen', [:my,message], :confirm => 'Wirklich löschen?', :method => :delete
+
+    
+    = link_to 'Neue Gruppe anlegen', new_my_group_path, :class => "btn btn-primary"    

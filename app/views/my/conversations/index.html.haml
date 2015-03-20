@@ -1,0 +1,22 @@
+#content
+  #main-wrapper
+    %h2 meine Nachrichten
+
+    %fieldset.last
+      %legend
+        alle Konversationen
+      %table.formtable
+        %tbody
+          - @conversations.each do |conversation|
+            %tr
+              %th
+              %td
+                = link_to my_conversation_path(conversation) do
+                  Nachrichten von/zu
+                  %strong
+                    = conversation.other_user_than_me(current_user).username unless conversation.other_user_than_me(current_user).nil?
+                  ansehen
+              %td
+
+    
+    = link_to 'Neue Nachricht senden', new_my_conversation_path, :class => "btn btn-primary"    

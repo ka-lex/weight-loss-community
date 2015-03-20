@@ -1,0 +1,49 @@
+- title "Abnehm-Ziele"
+- content_for :header do
+  = render "/shared/jquery_tools_overlay"
+
+.container
+  .jumbotron
+    %h1 Was sind Ziele ?      
+    = image_tag 'abnehm_ziele.png'
+    %p
+      Ziele sind wichtig. Nur wer sein Ziel benennen kann, der wird es erreichen können. Hier kannst Du einfach Dein Wunschgewicht festlegen und bis wann Du es erreichen willst. Übrigens kannst Du auch zunehmen - auch wenn “nimmt-ab.de” das Gegenteil erwarten lässt. Dein Ziel wird ebenso wie Dein Gewichtsverlust im Diagramm angezeigt. So weißt Du immer, wo Du gerade stehst und wie der weitere Verlauf sein kann. Freu Dich darauf, Dein Ziel zu erreichen. Anschließend kannst Du Dir neue Ziele setzen. Zum Beispiel Dein Wunschgewicht zu halten.
+    
+    #triggers
+      = image_tag "tour/screenshot_ziele_bearbeiten_small.png", :rel => "#photo2",:onClick => ("_gaq.push(['_trackEvent', 'Tour', 'Ziele', 'Screenshot_1']);")
+      = image_tag "tour/screenshot_ziele_small.png", :rel => "#photo1",:onClick => ("_gaq.push(['_trackEvent', 'Tour', 'Ziele', 'Screenshot_2']);")
+    = render "register_button"
+    %hr
+    %row
+      %p.pull-left
+        = link_to profil_path do
+          = image_tag "tour/links.png"
+          Profil
+        vorheriger Tourpunkt
+
+      %p.pull-right
+        nächster Tourpunkt:
+        = link_to gewichtstagebuch_path do
+          Gewichtstagebuch
+          = image_tag "tour/rechts.png"
+
+
+    #photo1.apple_overlay
+      = image_tag "tour/screenshot_ziele.png"
+      .details
+        %h2 Screenshot Ziele verwalten
+        %p
+          Neben Deinem aktuellen Zielgewicht sieht Du auch Deine bisherigen Ziele. Wenn Du ein Ziel erreicht hast oder ein neues Ziel verfolgen willst kannst Du das Aktuelle archivieren.
+    #photo2.apple_overlay
+      = image_tag "tour/screenshot_ziele_bearbeiten.png"
+      .details
+        %h2 Screenshot Ziel eintragen
+        %p
+          So einfach: Dein Ziel benennen, Zielgewicht eintragen und festlegen wann Du es erreichen willst. Optional kannst Du eine Beschreibung anlegen.
+
+
+<script>
+$(document).ready(function() {
+$("#triggers img[rel]").overlay({effect: 'apple'});
+});
+</script>

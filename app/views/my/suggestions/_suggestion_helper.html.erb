@@ -1,0 +1,15 @@
+<script type="text/javascript">
+$(document).ready(function() {
+$("#my_suggestions").hide();
+$("#my_suggestions_opener").click(function ( event ) {
+      event.preventDefault();
+      $("#my_suggestions").fadeToggle();
+    });
+
+$("#my_suggestions_close").click(function ( event ) {
+      event.preventDefault();
+      $("#my_suggestions").fadeOut();
+    });
+
+});
+</script>

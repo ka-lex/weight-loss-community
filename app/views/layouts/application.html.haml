@@ -1,0 +1,39 @@
+!!! XML
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "de", :lang => "de"}
+  %head
+    %title 
+      = @title || "Gemeinsam Abnehmen"
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" #needed for dynamic user nav
+    = yield :header
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    = csrf_meta_tag
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    = canonical_link
+    = render :partial => "/layouts/adserver_head"
+  %body
+    #wrap
+      = render "shared/static_outside_navbar"    
+      .container
+        = info_text
+        .row
+          - if user_signed_in?
+            .span2
+              .well.sidebar-nav
+                = render '/my/shared/left_navi'
+          .span2
+            = render "/shared/ads_lef_wideskyscraper"
+          .span9
+            = yield
+      #push    
+    %footer
+      = render "/layouts/footer"
+          
+      .tracking
+        = render :partial => "/layouts/google_analytics"
+        = yield :tracking
+
+    = render "/layouts/feedback"    
+    = javascript_include_tag '/users/current'
+    

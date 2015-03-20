@@ -1,0 +1,45 @@
+- title "Winterspeck weg - einfacher in der Community"
+
+#splash
+  .wrapper
+    #screenshot
+      %h1#headline weg mit dem Winterspeck!
+      #copy
+        %h2#intro Mit guten Vorsätzen ins neue Jahr.
+        %p
+          Nutze Deinen Bekanntenkreis, um die Pfunde purzeln zu lassen.
+        %p
+          Abnehmen an sich ist schwer genug. Mach es Dir einfacher und lass Dir von Deinen Freunden helfen.
+        
+        = link_to new_user_registration_url do
+          .register_button
+            %span
+              kostenlos registrieren
+#content
+
+  .wrapper
+
+    .onecolumn
+      %h2#collect Gewichtstagebuch
+      = image_tag 'gewichtstagebuch.png'
+      %p
+        Um Dein Gewicht im Blick zu haben kannst Du Dein persönliches Gewichtstagebuch anlegen. So kannst Du Dein Gewichtsverlust als Diagramm beobachten.
+        = link_to "Mein Gewichtstagebuch", gewichtstagebuch_path
+
+
+    .onecolumn
+      %h2#collect Ziele
+      = image_tag 'abnehm_ziele.png'
+      %p
+        Persönliche Ziele helfen, Dein Wunschgewicht zu erreichen. Lege gleich ein Ziel an und starte Deine Diät jetzt.
+        = link_to "Ziele kennenlernen", ziele_path
+
+    .onecolumn.last
+      %h2#collect Unterstützer
+      = image_tag 'unterstuetzer.png'
+      %p
+        Alleine Abnehmem ist nicht einfach. Daher kannst Du Dir Unterstützer suchen, Dir Dir beim Abnehmen helfen. Lade Deine Freunde ein um Dich beim Erreichen Deiner Ziele zu unterstützen.
+
+        = link_to "Mehr über Unterstützer erfahren", unterstuetzer_path
+      
+    %br.clearall

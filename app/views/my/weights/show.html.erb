@@ -1,0 +1,17 @@
+<p>
+  <b>User:</b>
+  <%= @weight.user_id %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @weight.value %>
+</p>
+<p>
+  <b>Created At:</b>
+  <%= @weight.created_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_weight_path(@user, @weight) %> |
+<%= link_to 'Back', user_weights_path %>

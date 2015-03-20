@@ -1,0 +1,16 @@
+$(document).ready(function() {
+$("#user_nav").replaceWith('<%=escape_javascript render("layouts/user_navigation")  %>');
+
+
+
+
+
+<% if user_signed_in? %>
+$(".logged_in").show();
+$(".logged_out").hide();
+<% else %>
+$(".logged_out").show();
+$(".logged_in").hide();
+<%  end %>
+
+});

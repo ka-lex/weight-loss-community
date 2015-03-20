@@ -1,0 +1,80 @@
+.sidebar-nav
+  - if user_signed_in?
+    %ul.nav.nav-list
+      %li.nav-header
+        = image_tag 'profil.png', :width => 20, :height => 20
+        = current_user.username    
+      %li
+        = link_to "Meine Seite", my_userprofile_url      
+
+      %li.nav-header
+        = image_tag 'abnehm_ziele.png', :width => 20, :height => 20
+        Ziel
+    
+      - if current_user.has_target?
+        %li
+          Zielgewicht
+          %i
+            = current_user.target_weight
+            kg
+        %li
+          Zielende
+          %i
+            = current_user.days_to_target
+            Tage
+      %li
+        - unless current_user.has_target?
+          = link_to "Ziel verwalten", new_my_target_url
+        - else
+          = link_to "Ziel bearbeiten", my_targets_url
+    
+      %li.nav-header
+        = image_tag 'gewichtstagebuch.png', :width => 20, :height => 20
+        Gewicht    
+      - unless current_user.current_weight.nil?
+        %li
+          Aktuelles Gewicht:
+          %i
+            = current_user.current_weight
+            kg
+      %li
+        = link_to "Gewicht eintragen", new_my_weight_url
+      %li
+        = link_to "BMI-Rechner", my_bmi_index_url
+
+    
+      %li.nav-header
+        = image_tag 'unterstuetzer.png', :width => 20, :height => 20
+        Unterstützer
+    
+      %li
+        = link_to "meine Unterstützer(#{current_user.friends.size})", my_supporters_url
+      %li
+        = link_to "alle Unterstützer", all_supporters_url
+      %li
+        = #link_to "Unterstützer einladen", new_user_invitation_path
+    
+      %li.nav-header
+        = image_tag 'gruppen.png', :width => 20, :height => 20
+        Gruppen
+    
+      %li
+        = link_to "meine Gruppen(#{current_user.groups.size})", my_groups_url
+      %li
+        = link_to "alle Gruppen", all_groups_url
+    
+      %li.nav-header
+        = image_tag 'nachrichten.png', :width => 20, :height => 20
+        Nachrichten
+      
+      %li
+        = link_to "alle Nachrichten", my_conversations_url
+      %li
+        = link_to "neue Nachricht", new_my_conversation_url
+
+      %li.nav-header
+        = image_tag 'tipps.png', :width => 20, :height => 20
+        Tipps
+  
+      %li
+        = link_to "alle Tipps", my_suggestions_url

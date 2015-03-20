@@ -1,0 +1,35 @@
+= form_for([:my, @group]) do |f|
+  - if @group.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@group.errors.count, "error")
+        prohibited this group from being saved:
+
+      %ul
+        - @group.errors.full_messages.each do |msg|
+          %li
+            = msg
+
+  %fieldset.last
+    %legend Ziel festlegen.
+    %table.formtable
+      %tbody
+        %tr
+          %th
+            = f.label :name, 'Gruppenbezeicher'
+          %td
+            = f.text_field :name, :class => "textfield"
+          %td
+        %tr
+          %th
+            = f.label :description, 'kurze Beschreibung'
+          %td
+            = f.text_area :description, :class => "textfield"
+          %td
+    %table.formtablesubmit
+      %tbody
+        %tr
+          %th
+          %td
+            = f.submit "Gruppe speichern", :onClick => ("_gaq.push(['_trackEvent', 'Group', 'FORM', '" + @user.friendly_id + "']);"), :class => "btn btn-primary"
+          %td

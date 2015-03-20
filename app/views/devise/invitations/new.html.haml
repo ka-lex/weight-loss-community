@@ -1,0 +1,30 @@
+- noindex
+#content
+  #main-wrapper
+    %h2 Einladung versenden
+    %p
+      Freunde und Bekannte einladen
+      = form_for resource, :as => resource_name, :url => invitation_path(resource_name) do |f|
+        = devise_error_messages!
+
+        %fieldset.last
+          %legend Einladung versenden an
+          %table.formtable
+            %tbody
+              %tr
+                %th
+                  = f.label :email
+                %td
+                  = f.text_field :email, :class => "textfield"
+                %td
+
+        %table.formtablesubmit
+          %tbody
+            %tr
+              %th
+              %td
+                = f.submit "Einladung versenden", :onClick => ("_gaq.push(['_trackEvent', 'Invitation', 'New', $('#user_email').val()]);"), :class => "btn btn-primary"
+              %td
+        
+
+      = link_to "Abbrechen", after_sign_in_path_for(resource_name)

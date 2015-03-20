@@ -1,0 +1,38 @@
+#content
+  #main-wrapper
+    %h2 Unterstützer
+
+    %fieldset.last
+      %legend
+        #{@user.username}'s Unterstützer
+      %table.formtable
+        %tbody
+          - @pending.each do |pending|
+            %tr
+              %th 
+                = link_to pending.username, all_supporter_path( pending)
+              %td warte auf Bestätigung
+              %td
+
+          - @confirm.each do |confirm|
+            %tr
+              %th
+                = link_to confirm.username, all_supporter_path(confirm)
+              %td Benutzer wartet auf Bestätigung
+              %td
+                = form_tag({:controller => "/my/supporters", :action => 'confirm'}, :method => 'post') do
+                  = hidden_field_tag 'friend_id', confirm.id
+                  = submit_tag 'Freundschaft bestätigen', :class => "submit_button"
+          - @friends.each do |friend|
+            %tr
+              %th
+                = link_to friend.username, my_supporter_path(friend) #root_url(:subdomain => friend.friendly_id)
+              %td befreundet
+              %td
+                - if @user == current_user
+                  %i
+                    = form_tag(my_supporter_path(friend), :method => 'delete') do
+                      = hidden_field_tag 'friend_id', friend.id
+                      = submit_tag 'Unterstützung beenden', :class => "submit_button"
+    
+    = link_to "alle Profile anzeigen", all_supporters_url

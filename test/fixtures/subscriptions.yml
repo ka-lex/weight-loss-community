@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  account_id: 1
+  plan_name: MyString
+  next_renewal_at: 2012-03-03
+  auto_recurring: false
+  psp_reference: MyString
+
+two:
+  account_id: 1
+  plan_name: MyString
+  next_renewal_at: 2012-03-03
+  auto_recurring: false
+  psp_reference: MyString

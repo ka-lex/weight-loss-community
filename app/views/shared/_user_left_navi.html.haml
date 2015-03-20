@@ -1,0 +1,89 @@
+#left_nav
+  - if user_signed_in?
+    %h2
+      = image_tag 'profil.png', :weight => 20, :height => 20
+      = current_user.username
+    %ul
+      %li
+        = link_to "persönliche Daten", edit_my_account_path
+      %li
+        = link_to "Privatsphäre", edit_my_setting_path
+      %li
+        = link_to "Zugangsdaten",edit_user_registration_url
+      %li
+        = link_to "öffentliches Profil", account_url(current_user)
+
+
+    %span.spacer
+    %h2
+      = image_tag 'abnehm_ziele.png', :weight => 20, :height => 20
+      Ziel
+    %ul
+      - if current_user.has_target?
+        %li
+          Zielgewicht
+          %i
+            = current_user.target_weight
+            kg
+        %li
+          Zielende
+          %i
+            = current_user.days_to_target
+            Tage
+      %li
+        - unless current_user.has_target?
+          = link_to "Ziel verwalten", new_my_target_url
+        - else
+          = link_to "Ziel bearbeiten", my_targets_url
+    %span.spacer
+    %h2
+      = image_tag 'gewichtstagebuch.png', :weight => 20, :height => 20
+      Gewicht
+    %ul
+      - unless current_user.current_weight.nil?
+        %li
+          Aktuelles Gewicht:
+          %i
+            = current_user.current_weight
+            kg
+      %li
+        = link_to "Gewicht eintragen", new_my_weight_url
+      %li
+        = link_to "BMI-Rechner", my_bmi_index_url
+
+    %span.spacer
+    %h2
+      = image_tag 'unterstuetzer.png', :weight => 20, :height => 20
+      Unterstützer
+    %ul      
+      %li
+        = link_to "meine Unterstützer(#{current_user.friends.size})", my_supporters_url
+      %li
+        = link_to "alle Unterstützer", all_supporters_url
+      %li
+        = #link_to "Unterstützer einladen", new_user_invitation_path
+    %span.spacer
+    %h2
+      = image_tag 'gruppen.png', :weight => 20, :height => 20
+      Gruppen
+    %ul
+      %li
+        = link_to "meine Gruppen(#{current_user.groups.size})", my_groups_url
+      %li
+        = link_to "alle Gruppen", all_groups_url
+    %span.spacer
+    %h2
+      = image_tag 'nachrichten.png', :weight => 20, :height => 20
+      Nachrichten
+    %ul
+      %li
+        = link_to "alle Nachrichten", my_conversations_url
+      %li
+        = link_to "neue Nachricht", new_my_conversation_url
+    %span.spacer
+    %h2
+      = image_tag 'tipps.png', :weight => 20, :height => 20
+      Tipps
+    %ul
+      %li
+        = link_to "alle Tipps", my_suggestions_url

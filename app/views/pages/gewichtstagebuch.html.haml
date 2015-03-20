@@ -1,0 +1,62 @@
+- title "Gewichtstagebuch"
+- content_for :header do
+
+  = render "/shared/jquery_tools_overlay"
+
+.container
+  .jumbotron
+    %h1 Gewichtstagebuch
+    %h2 
+      Weil man sich nicht alles merken kann
+      %span.muted das Gewichtstagebuch.
+    
+    %p
+      Trage alle paar Tage Dein Gewicht ein. So kannst Du Dir den Abnehmerfolg organisieren. Als Schmankerl wird Dein Gewichtsverlauf visuell dargestellt. Im Diagramm sieht Du neben den einzelnen Einträgen auch Die Zukunft: falls Du ein Ziel (Wunschgewicht) eingerichtet hast wird der Weg dahin auch dargestellt. 
+    %p
+      Neben den Werten und dem Diagramm kannst Du auch Infos zu eizelnen Tagen eintragen. Beispielsweise ob Du Dich an Deine gesunde Ernährung gehalten hast - oder zwischendurch doch mal gesündigt hast. Mit diesen Infos lässt sich später das Auf und Ab leichter nachvollziehen.
+
+
+    #triggers
+      = image_tag "tour/screenshot_profil_gewichtstagebuch_small.png", :rel => "#photo1",:onClick => ("_gaq.push(['_trackEvent', 'Tour', 'Gewichtstagebuch', 'Screenshot_1']);")
+      = image_tag "tour/screenshot_gewicht_eintragen_small.png", :rel => "#photo2",:onClick => ("_gaq.push(['_trackEvent', 'Tour', 'Gewichtstagebuch', 'Screenshot_2']);")
+
+    = render "register_button"    
+
+   
+
+    %hr
+    %row
+      %p.pull-left
+        = link_to ziele_path do
+          = image_tag "tour/links.png"
+          Ziele
+        vorheriger Tourpunkt
+      %p.pull-right
+        nächster Tourpunkt:
+        = link_to unterstuetzer_path do          
+          Unterstützer
+          = image_tag "tour/rechts.png"
+
+    #photo1.apple_overlay
+      = image_tag "tour/screenshot_profil_gewichtstagebuch_medium.png"
+
+      .details
+        %h2 Screenshot Gewichtstagebuch
+
+        %p
+          In Deinem Profil kannst Du Dein Gewicht protokollieren und im Diagramm Deine Erfolge überprüfen.
+    #photo2.apple_overlay
+      = image_tag "tour/screenshot_gewicht_eintragen.png"
+
+      .details
+        %h2 Screenshot Gewicht eintragen
+
+        %p
+          Gewicht eintragen ist ganz einfach. So kannst Du täglich Dein Gewicht protokollieren.
+
+
+<script>
+$(document).ready(function() {
+$("#triggers img[rel]").overlay({effect: 'apple'});
+});
+</script>

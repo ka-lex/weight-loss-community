@@ -1,0 +1,17 @@
+- title "Live Ticker - alle News kompakt" 
+
+.container
+  %h1 Ticker
+  .wrapper
+    %h2 aktuelle Änderungen
+  
+    
+    - @tickers.each do |ticker|
+      %blockquote
+        = link_to ticker.username, account_url(ticker.user)
+          
+        %span.text-info
+          = ticker.event
+        %small  
+          vor
+          = ticker.since

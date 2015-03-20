@@ -1,0 +1,47 @@
+- title "Unterstützer beim Abnehmen"
+- content_for :header do
+  = render "/shared/jquery_tools_overlay"
+
+.container
+  .jumbotron
+    %h1 
+      Unterstützer
+      %span.muted helfen Dir beim Abnehmen.
+  
+    = image_tag 'unterstuetzer.png'
+    %p
+      Baue Dein Netzwerk auf uns lass Dir beim Gewichtsverlust helfen. Immer wenn Du Unterstützung brauchst sind Deine Helfer an Deiner Seite. Halte Sie auf dem Laufenden und frag um Rat, wenn Du nicht weiter weißt. Egal ob es Dir schlecht geht oder Du Deine Freude über Erfolge mit anderen Teilen willst: schreibe ihnen, und teil Dich mit. “nimmt-ab” ist die Abnehm-Community im Internet.
+
+    
+    #triggers
+      = image_tag "tour/screenshot_unterstützer_small.png", :rel => "#photo1",:onClick => ("_gaq.push(['_trackEvent', 'Tour', 'Untetstützer', 'Screenshot_1']);")
+    = render "register_button"
+    
+    %hr
+    %row
+      %p.pull-left
+        = link_to gewichtstagebuch_path do
+          = image_tag "tour/links.png"
+          Gewichtstagebuch
+        vorheriger Tourpunkt     
+
+      %p.pull-right
+        nächster Tourpunkt:
+        = link_to profil_path do
+          Profil
+          = image_tag "tour/rechts.png"
+
+       
+
+    #photo1.apple_overlay
+      = image_tag "tour/screenshot_unterstützer.png"
+      .details
+        %h2 Screenshot Unterstützer
+        %p
+          Du kannst Deine Unterstützer jederzeit einsehen. Hier erscheinen auch Anfragen zur Unterstützung von anderen Usern und Deine noch nicht bestätigten Unterstützungsanfragen. Willst Du nicht weiter Unterstützt werden so kannst Du mit zwei Klicks die Beziehung zu anderen Usern beenden.
+
+<script>
+$(document).ready(function() {
+$("#triggers img[rel]").overlay({effect: 'apple'});
+});
+</script>

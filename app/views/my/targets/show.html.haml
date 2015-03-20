@@ -1,0 +1,41 @@
+#content
+  #main-wrapper
+    %h2 mein Ziel
+
+    %fieldset.last
+      - unless @target.status == 'ARCHIVED'
+        %legend Hier ist Dein aktuelles Ziel:
+      - else
+        %legend Hier ist Dein archiviertes Ziel:
+      %table.formtable
+        %tbody
+          %tr
+            %th
+              Ziel
+            %td
+              = @target.title
+            %td
+          %tr
+            %th
+              Ziel-Gewicht
+            %td
+              = @target.value_string
+            %td
+          %tr
+            %th
+              Beschreibung
+            %td
+              = @target.description
+            %td
+
+          %tr
+            %th
+              Ziel soll erreicht sein am
+            %td
+              = @target.end_date.strftime("%d.%m.%Y")
+            %td
+
+
+      
+
+    = link_to 'Zurück', my_targets_path

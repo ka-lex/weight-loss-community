@@ -1,0 +1,5 @@
+#user_nav
+  - unless user_signed_in?
+    = render "layouts/logged_out_navigation"
+  - else
+    = render "layouts/logged_in_navigation"

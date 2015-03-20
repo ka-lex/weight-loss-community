@@ -1,0 +1,74 @@
+- content_for :header do
+  <script src="http://cdn.jquerytools.org/1.2.6/jquery.tools.min.js"></script>
+  = render "payment_header"
+
+  
+
+#content
+  #main-wrapper
+    %h2 Dein aktueller Status
+
+    - if current_account.subscription.nil?
+
+
+      Du bist kostenloses Basis-Mitglied. 
+
+      Möchtest Du
+
+      %ul
+        %li
+          keine Werbung mehr sehen?
+        %li
+          Premium-Angebote erhalten?
+        %li
+          Ernährungstipps vom Profi bekommen?
+
+      Dann hole Dir jetzt die
+      = link_to "werbefreie Mitgliedschaft", new_my_payment_path, :rel => "#overlay"
+
+    - else
+
+      %fieldset.last
+        %legend
+          Du bist Premium-Mitglied
+
+        %table.formtable
+          %tbody
+            %tr
+              %th
+                Deine Mitgliedschaft läuft bis einschließlich
+              %td
+                = I18n.l current_account.subscription.next_renewal_at
+              %td
+            %tr
+              %th
+                Deine Buchung
+              %td
+                = current_account.subscription.plan_name
+              %td
+            %tr
+              %th
+                Buchungungsnummer
+              %td
+                = current_account.subscription.psp_reference
+              %td
+            %tr
+              %th
+                Mitgliedschaft wurde angelegt am
+              %td
+                = I18n.l current_account.subscription.created_at, :format => :short
+              %td
+
+      
+      
+
+<!-- overlayed element -->
+<div class="simple_overlay" id="overlay">
+<!-- the external content is loaded inside this tag -->
+<div class="contentWrap">
+= render "payment_iframe"
+</div>
+</div>
+
+
+= render "overlay_js"

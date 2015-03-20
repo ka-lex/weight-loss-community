@@ -1,0 +1,8 @@
+de:
+  devise:
+    invitations:
+      send_instructions: 'Eine E-Mail mit Anleitung wurde verschickt.'
+      updated: 'Deine Daten wurden erfolgreich gespeichert. Du bist nun eingeloggt.'
+    mailer:
+      invitiation:
+        subject: 'Einladung'

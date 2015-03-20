@@ -1,0 +1,54 @@
+- noindex
+#content
+  #main-wrapper
+    %h2 Account anlegen
+
+
+    %p
+      Daten vervollständigen
+      = form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f|
+        = devise_error_messages!
+        = f.hidden_field :invitation_token
+        %fieldset.last
+          %legend Einladung versenden an
+          %table.formtable
+            %tbody
+              %tr
+                %th
+                  = f.label :username, 'Nickname'
+                %td
+                  = f.text_field :username, :class => "textfield"
+                %td
+                  %i (der Benutzername wird später in der URL zum Profil genutzt, beispielsweise peter.nimmt-ab.de )
+              %tr
+                %th
+                  = f.label :password, "Passwort"
+                %td
+                  = f.password_field :password, :class => "textfield"
+                %td
+              %tr
+                %th
+                  = f.label :password_confirmation, 'Passwort wiederholen'
+                %td
+                  = f.password_field :password_confirmation, :class => "textfield"
+                %td
+              %tr
+                %th
+                  Ich habe die
+                  = link_to("Datenschutzrichtlinie", datenschutz_url)
+                  und
+                  = link_to("Nutzungsbedingungen", nutzungsbedingungen_url)
+                  gelesen und akzeptiere sie.
+                %td
+                  = f.check_box :accepted_term
+                %td
+
+
+
+        %table.formtablesubmit
+          %tbody
+            %tr
+              %th
+              %td
+                = f.submit "Account anlegen", :class => "btn btn-primary"
+              %td

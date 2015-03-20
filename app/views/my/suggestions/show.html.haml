@@ -1,0 +1,55 @@
+#content
+  #main-wrapper
+    %h2 
+      Tipp:
+      %i
+        = @suggestion.text
+
+    - unless @suggestion.creator == current_user
+      %fieldset.last
+        %legend
+          meine Bewertung
+        %table.formtable
+          %tbody
+            %tr
+              %th
+                Deine Wertung:
+              - if @voting.new_record?
+                %td
+
+                  = form_for([:my, @suggestion,Voting.new]) do |f|
+                    = f.hidden_field :vote, :value => 'good'
+                    = f.submit 'Mit "gut" bewerten', :class => "submit_button"
+
+                %td
+                  = form_for([:my, @suggestion,Voting.new]) do |f|
+                    = f.hidden_field :vote, :value => 'bad'
+                    = f.submit 'Mit "schlecht" bewerten', :class => "submit_button"
+              - else
+                %td
+
+                  - if @voting.good_voting?
+                    Gut
+                  - else
+                    Schlecht
+                %td
+
+
+    %fieldset.last
+      %legend
+        Bewertungen     
+      %strong
+        = link_to my_suggestion_path(@suggestion) do
+          "
+          = @suggestion.text
+          "
+      %span                
+        (
+        %i.icon-thumbs-up
+        = @suggestion.good_votings
+        %i.icon-thumbs-down
+        = @suggestion.bad_votings
+        )
+
+    %hr
+    = link_to 'alle Tipps', my_suggestions_path

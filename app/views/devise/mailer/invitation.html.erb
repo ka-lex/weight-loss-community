@@ -1,0 +1,7 @@
+<p>Hallo <%= @resource.email %>!</p>
+
+<p>Jemand hat Dich zu <%= link_to 'www.nimmt-ab.de', 'http://www.nimmt-ab.de/' %> eingeladen. Du kannst die Einladung mit folgendem Link bestätigen:</p>
+
+<p><%= link_to 'Einladung bestätigen', accept_invitation_url(@resource, :invitation_token => @resource.invitation_token) %></p>
+
+<p>Falls Du die Einladung nicht akzeptieren willst, ignoriere sie einfach.</p>

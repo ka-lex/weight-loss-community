@@ -1,0 +1,28 @@
+%table.formtable
+  %tbody
+    - @groups.each do |group|
+      %tr
+        %th
+          - if group.is_member? current_user
+            = link_to group.name, [:my, group]
+          - else
+            = link_to group.name, [:all, group]
+        %td
+          = group.description
+        %td
+          - if user_signed_in?
+            - if group.owner? current_user
+              = link_to 'bearbeiten', edit_my_group_path(group)
+              |
+              = link_to 'löschen', [:my, group], :confirm => 'Wirklich Gruppe löschen?', :method => :delete
+            - if group.is_member? current_user
+              - unless group.owner? current_user
+                = form_tag({:controller => "/my/group_members", :action => 'destroy'}, :method => 'delete') do
+                  = hidden_field_tag 'group_id', group.id
+                  = submit_tag 'aus Gruppe austreten', :class => "submit_button"
+            - else
+              = form_tag({:controller => "my/group_members", :action => 'create'}, :method => 'post') do
+                = hidden_field_tag 'group_id', group.id
+                = submit_tag 'Gruppe beitreten', :class => "btn btn-primary"
+.submit_link
+  = link_to 'Neue Gruppe anlegen', new_my_group_path, :class => "btn btn-primary"

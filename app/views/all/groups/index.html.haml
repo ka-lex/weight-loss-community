@@ -1,0 +1,9 @@
+- content_for :header do
+  = javascript_include_tag "application"
+
+#content
+  #main-wrapper
+    - if @supporter
+      = render "supporter_groups"
+    - else
+      = render "all_groups"

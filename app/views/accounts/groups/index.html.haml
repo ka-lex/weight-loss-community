@@ -1,0 +1,24 @@
+- content_for :header do
+  = javascript_include_tag "application"
+
+#content
+  #main-wrapper
+    %h2 Gruppen
+
+    %fieldset.last
+      %legend
+        alle Gruppen von #{@user.username}
+      %table.formtable
+        %tbody
+          - @groups.each do |group|
+            %tr
+              %th
+                = link_to group.name, [:supporters, group]
+              %td
+                = group.description
+              %td
+                - if user_signed_in?
+                  - if group.is_member? current_user
+                    = link_to "austreteten" unless group.owner? current_user
+                  - else
+                    = link_to "eintreten"

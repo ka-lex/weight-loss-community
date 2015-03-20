@@ -1,0 +1,77 @@
+- title "Gemeinsam Abnehmen in der Community"
+.container
+
+  .hero-unit
+    %h1 Gemeinsam abnehmen ist einfacher
+    %p
+      .row
+        .span5
+          %h2 Nutze Deinen Bekanntenkreis, um die Pfunde purzeln zu lassen.
+          %p
+            Abnehmen an sich ist schwer genug. Mach es Dir einfacher und lass Dir von Deinen Freunden helfen.
+          
+          
+          = link_to new_user_registration_url, :class => "btn btn-large btn-primary" do
+            Jetzt Registrieren »
+        .span5.pull-right
+          = image_tag "abnehmen.jpg", :class => "img-polaroid"
+
+
+.container.marketing
+  .row
+    .span4
+      %h2 Unterstützer
+      .icon
+        = link_to "", unterstuetzer_path, :class => "icons-unterstuetzer"
+      
+      %p
+        Alleine Abnehmem ist nicht einfach. Daher kannst Du Dir Unterstützer suchen, Dir Dir beim Abnehmen helfen. Lade Deine Freunde ein um Dich beim Erreichen Deiner Ziele zu unterstützen.
+        = link_to "Meine Unterstützer hinzufügen", accounts_path
+        oder
+        = link_to "mehr über Unterstützer erfahren", unterstuetzer_path
+
+
+    .span4
+      %h2 Ziele
+      .icon
+        = link_to "", ziele_path, :class => "icons-abnehm_ziele"
+      %p
+        Persönliche Ziele helfen, Dein Wunschgewicht zu erreichen. Lege gleich ein Ziel an und starte Deine Diät jetzt.
+        = link_to "Ziele kennenlernen", ziele_path
+
+    .span4
+      %h2 Gewichtstagebuch
+      .icon
+        = link_to "", gewichtstagebuch_path, :class => 'icons-gewichtstagebuch'
+      %p
+        Um Dein Gewicht im Blick zu haben kannst Du Dein persönliches Gewichtstagebuch anlegen. So kannst Du Dein Gewichtsverlust als Diagramm beobachten.
+        = link_to "Mein Gewichtstagebuch", gewichtstagebuch_path    
+
+  .row
+    .span4
+      %h2 Profil
+      .icon
+        = link_to "", profil_path, :class => 'icons-profil'
+      %p
+        Um Dein Gewicht im Blick zu haben kannst Du Dein persönliches Profil anlegen.
+        = link_to "Mein Profil erstellen", new_user_registration_url
+        oder
+        = link_to "mehr über Dein Profil erfahren", profil_path
+
+    .span4
+      %h2 Tour
+      .icon
+        = link_to "", tour_path, :class => 'icons-tour'
+      %p
+        Lerne "nimmt-ab.de" besser kennen und erfahre mehr über die einzelnen
+        = link_to "Features in der Tour", tour_path
+
+    .span4
+      %h2 Änderungsticker
+      .icon
+        = link_to "", ticker_path, :class =>  'icons-ticker'
+      %p
+        Bleibe auf dem Laufenden. Alles was bei nimmt-ab.de geschicht im
+        = link_to "Ticker", ticker_path
+  %hr
+  

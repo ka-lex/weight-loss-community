@@ -1,0 +1,44 @@
+#content
+  #main-wrapper
+    %h2 neue Nachricht
+
+    - if @pm.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@pm.errors.count, "error")
+          Fehler beim Senden der Nachricht
+        %ul
+          - @pm.errors.full_messages.each do |msg|
+            %li
+              = msg
+
+    %fieldset.last
+      %legend
+        Nachricht verfassen
+      %table.formtable
+        %tbody
+          = form_for @pm, :url => {:action => "create"} do |f|
+            %tr
+              %td
+                Empfänger
+              %th
+                - if @pm.to.nil?
+                  - receiver_array = current_user.friends.map {|friend| [friend.username, friend.id]}
+                  = f.select :to_user_id, receiver_array, :class => "select_field"
+                - else
+                  = @pm.to.username
+                  = f.hidden_field :to_user_id
+              %td
+                
+            %tr
+              %th
+
+              %td
+                = f.text_area :body, :size => "24x6"
+              %td
+
+            %tr
+              %th
+              %td
+                = f.submit "Nachricht schicken", :class => "btn btn-primary"
+              %td   

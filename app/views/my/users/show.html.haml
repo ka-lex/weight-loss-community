@@ -1,0 +1,78 @@
+- title "Profil von #{current_user.username}" 
+- content_for :header do
+  = javascript_include_tag 'highcharts'
+
+
+- content_for :tracking do
+  - if (@user.confirmed_at? && @user.confirmed_at.to_date == Date.today)
+    = render 'shared/google_analytics_track_conversion'
+
+= render 'shared/google_adwords_conversion_tracking' if (@user.confirmed_at? && @user.confirmed_at.to_date == Date.today)
+
+- if current_user.has_target? && current_user.has_weight?
+  #weights_chart{:style => "width: 750px;height: 300px;"}
+    #charts_result
+      .spinner{:style => "text-align:center"}
+        = image_tag "spinner.gif"
+.row-fluid
+  .span4
+  .span4
+    %p
+      %a.btn{"data-toggle" => "modal", "href" => "#myNewWeight", "role" => "button" }
+        neuen Messwert eintragen
+
+= render "/my/weights/modal"
+
+.row-fluid
+  .span
+    - unless current_user.has_target? && current_user.has_weight?      
+      - unless current_user.has_weight?
+        #info
+          %p.text-warning
+            Um Dein Gewichtsverlauf als Graph dargestellt zu bekommen musst Du Dein Gewicht eintragen.
+            = link_to "Gewicht eintragen", new_my_weight_url
+      - unless current_user.has_target?
+        #info
+          %p.text-info
+            Um Dein Gewichtsverlauf als Graph dargestellt zu bekommen muss ein Ziel eingerichtet sein.
+            = link_to "Ziel einrichten", new_my_target_url
+
+    = render :partial => "waiting_friend_requests" if @how_many_pending > 0
+
+    .row-fluid
+      .span12
+        %p.lead
+          Status
+        %p
+          
+          = form_for @pinboard_message, :html => {:class => "form-inline"} do |f|
+            Mein Status
+            = f.hidden_field :from_user_id
+            = f.hidden_field :to_user_id
+            = f.text_field :body, :class => ""
+            = f.button "Posten", :onClick => ("_gaq.push(['_trackEvent', 'Ticker', 'New Status Message', '" + @user.friendly_id + "']);"), :class => "btn btn-large"
+      .span12 
+        %p.lead Ticker       
+        %p
+          #ticker_result
+            .spinner{:style => "text-align:center"}
+              = image_tag "spinner.gif"
+
+<script>
+$(function() {
+$( "#info" ).show( "bounce", {}, 500 );
+function callback() {};
+
+$.get("/my/charts/show", function(data) {
+$('#charts_result').html(data);
+});
+
+
+$.get("/my/tickers/show", function(data) {
+$('#ticker_result').html(data);
+});
+
+});
+
+$('#myModal').modal('hide');
+</script>

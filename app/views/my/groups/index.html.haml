@@ -1,0 +1,28 @@
+#content
+  #main-wrapper
+    %h2 meine Gruppen
+
+    %fieldset.last
+      %legend
+        alle Gruppen in denen ich bin:
+      %table.formtable
+        %tbody
+          - @groups.each do |group|
+            %tr
+              %th
+                = link_to group.name, my_group_path(group)
+              %td
+                = group.description
+              %td
+                - if group.owner? current_user
+                  = link_to 'bearbeiten', edit_my_group_path(group)
+                  |
+                  = link_to 'löschen', [:my,group], :confirm => 'Wirklich Gruppe löschen?', :method => :delete
+                - else
+                  = form_tag({:controller => "/my/group_members", :action => 'destroy'}, :method => 'delete') do
+                    = hidden_field_tag 'group_id', group.id
+                    = submit_tag 'aus Gruppe austreten', :class => "submit_button"
+
+    
+    .submit_link
+      = link_to 'Neue Gruppe anlegen', new_my_group_path, :class => "btn btn-primary"

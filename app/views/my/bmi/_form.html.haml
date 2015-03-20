@@ -1,0 +1,29 @@
+= form_for([:my, @user.account]) do |f|
+  - if @user.account.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@user.account.errors.count, "error")
+        prohibited this group from being saved:
+
+      %ul
+        - @user.account.errors.full_messages.each do |msg|
+          %li
+            = msg
+
+  %fieldset.last
+    %legend Um Dein BMI zu errechnen bitte Deine Größe in cm angeben.
+    %table.formtable
+      %tbody
+        %tr
+          %th
+            = f.label :size, 'Körpergröße (cm)'
+          %td
+            = f.text_field :size, :class => "textfield"
+          %td
+    %table.formtablesubmit
+      %tbody
+        %tr
+          %th
+          %td
+            = f.submit "Größe speichern", :class => "btn btn-primary"
+          %td

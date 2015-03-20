@@ -1,0 +1,10 @@
+#info_text
+  .alert.alert-block.alert-info
+    %span
+      = notice
+<script>
+$(function() {
+$( "#info_text" ).show( "bounce", {}, 500 ).delay(2000).fadeOut(500);
+function callback() {};
+});
+</script>

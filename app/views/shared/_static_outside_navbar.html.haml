@@ -1,0 +1,12 @@
+.navbar.navbar-fixed-top.navbar-inverse
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    = link_to root_url, :class => 'brand' do
+      = image_tag "background_logo.png", :alt =>  "Abnehmen in der Community: nimmt-ab.de"
+    
+    .container.nav-collapse
+      = render "layouts/logged_out_navigation"

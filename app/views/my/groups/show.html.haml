@@ -1,0 +1,55 @@
+#content
+  #main-wrapper
+    %h2
+      = @group.name
+
+    %fieldset.last
+      %legend
+        Einstellungen der Gruppe
+      %table.formtable
+        %tbody
+          %tr
+            %th
+              = @group.name
+            %td
+              = @group.description
+            %td
+              - if user_signed_in?
+                - if @group.owner? current_user
+                  = link_to 'bearbeiten', edit_my_group_path(@group)
+                  |
+                  = link_to 'löschen', [:my, @group], :confirm => 'Wirklich Gruppe löschen?', :method => :delete
+                - if @group.is_member? current_user
+                  = link_to "austreteten" unless @group.owner? current_user
+                - else
+                  = link_to "eintreten"
+                  
+    %fieldset.last
+      %legend
+        Mitglieder
+        - @group.users.each do |member|
+          %ul
+            %li
+              = link_to_user_account member
+
+    %h2 Kommentare
+    %p
+      Mein Kommentar
+      = form_for [:my, @group_comment] do |f|
+        = f.hidden_field :group_id
+        = f.text_field :content, :class => "wide_textfield"        
+        = ga_submit_button f, "Posten", "Group Comment", "New Group Comment",@user.friendly_id
+  
+    %fieldset.last
+      %legend
+        Kommentare
+      - @group.group_comments.reverse.each do |comment|
+        %ul
+          %li
+            Kommentar von
+            = link_to_user_account comment.commentator            
+            %p
+              %b
+                = comment.content
+
+    = link_to 'zurück zu meinen Gruppen', my_groups_path

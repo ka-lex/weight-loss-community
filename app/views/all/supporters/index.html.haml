@@ -1,0 +1,31 @@
+- title "Liste der Unterstützer" 
+#content
+  .wrapper
+
+    %h1#headline Liste der Benutzer
+    %h2#intro Hier siehst Du die bereits registrierten Benutzer
+    %p
+      Jeder Nutzer hat seine eigene Seite. Er gibt so viel Informationen über sich Preis, wie er es für richtig hält. Alle Infos über Dich sind in Deinen Einstellungen konfigurierbar.    
+        
+    %br.clearall
+
+    %fieldset.last
+      %legend
+        potentielle Unterstützer
+      %table.formtable
+        %tbody
+          - @users.each do |user|
+            %tr
+              %th
+                = link_to_user_account user
+              %td
+                %i
+                  - if user.friend_with? current_user
+                    ihr seid bereits befreundet.
+                  - if (current_user.pending_invited.include? user)
+                    Anfrage offen.
+                  - unless (user.friend_with? current_user) || (current_user.pending_invited.include? user)
+                    = form_tag({:controller => :supporters, :action => 'create'}, :method => 'post') do
+                      = hidden_field_tag 'friend_id', user.id
+                      = submit_tag 'als Unterstützer hinzufügen', :class => "btn btn-primary"
+              %td

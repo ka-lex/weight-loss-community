@@ -1,0 +1,57 @@
+#left_nav
+  %h2
+    = image_tag 'profil.png', :weight => 20, :height => 20
+    = user.username
+
+  %span.spacer
+  %h2
+    = image_tag 'abnehm_ziele.png', :weight => 20, :height => 20
+    Ziel
+  %ul
+    - if user.setting.show_target?
+      - if user.has_target?
+        %li
+          Zielgewicht
+          %i
+            = user.target_weight
+            kg
+        %li
+          Zielende
+          %i
+            = user.days_to_target
+            Tage
+      - else
+        Kein Ziel eingetragen
+  %span.spacer
+  %h2
+    = image_tag 'gewichtstagebuch.png', :weight => 20, :height => 20
+    Gewicht
+  %ul
+    - if user.setting.show_weight?
+      - unless user.current_weight.nil?
+        %li
+          Aktuelles Gewicht:
+          %i
+            = user.current_weight
+            kg
+
+  %span.spacer
+  %h2
+    = image_tag 'unterstuetzer.png', :weight => 20, :height => 20
+    Unterstützer
+  %ul
+    %li
+      = link_to "#{user.username}'s Unterstützer", all_supporter_supporters_url(user)
+    %li
+      = link_to "alle Unterstützer", all_supporters_url
+  %span.spacer
+  %h2
+    = image_tag 'gruppen.png', :weight => 20, :height => 20
+    Gruppen
+  %ul
+    %li
+      = link_to "#{user.username}'s Gruppen", all_supporter_groups_url(user)
+    %li
+      = link_to "alle Gruppen", all_groups_url
+
+

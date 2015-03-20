@@ -1,0 +1,45 @@
+!!! XML
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "de", :lang => "de"}
+  %head
+    %title 
+      = @title || "Gemeinsam Abnehmen"
+    = stylesheet_link_tag "application"
+    = yield :header
+    = csrf_meta_tag
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    = canonical_link
+  %body
+    #application
+      #header
+        .wrapper
+          #logo
+            %span
+              = link_to root_url, :id => 'logo_link' do
+                = image_tag "background_logo.png", :alt =>  "Abnehmen in der Community: nimmt-ab.de"
+          #user_nav
+            = render "layouts/logged_out_navigation"
+      #pagebar
+        .wrapper
+          %h1
+            = @title
+      #main_outside
+        
+        = #ads
+        #main-inner
+          = info_text
+
+          = yield
+          
+          = #large_rectangle_below_content #ads
+        = #render "/layouts/left_wide_skyscraper"
+        #left_content
+        #right_wideskyscraper_outside
+          = render "/shared/right_wide_skyscraper_outside"
+        
+      #footer_outside
+        = render "/layouts/footer"
+          
+  .tracking
+    = render :partial => "/layouts/google_analytics"
+

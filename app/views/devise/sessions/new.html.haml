@@ -1,0 +1,53 @@
+- title "Einloggen bei der Abnehm-Community"
+.row
+  .span
+    %h2 Einloggen
+    
+    %h3 E-Mailadresse bereits bestätigt?
+    %p
+      Um Dich das erste Mal nach der Registrierung einloggen zu können musst Du Deine E-Mailadresse bestätigt haben. Hierzu haben wir Dir bei der Registrierung eine Mail an die eingetragene Adresse mit einem Bestätigungslink geschickt. Sobald Du den Link aufgerufen hast ist Deine Mailadresse bestätigt und Du kannst Dich zum ersten Mal einloggen.
+      = link_to "Bestätigung nicht erhalten?", new_confirmation_path(resource_name)
+    .alert.alert-info
+      %p
+        %b Info
+        %i Manchmal kommt es vor, dass die Bestätigungsmail versehentlich im Spam-Ordner landet.
+    
+
+    
+
+    = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+
+      %fieldset.last
+        %legend Jetzt einloggen
+        %table.formtable
+          %tbody
+
+            %tr
+              %th 
+                = f.label :email, 'E-Mailadresse'
+              %td 
+                = f.text_field :email, :class => "textfield"
+              %td
+
+            %tr
+              %th
+                = f.label :password, "Passwort"
+              %td
+                = f.password_field :password, :class => "textfield"
+              %td
+
+            - if devise_mapping.rememberable?
+              %tr
+                %th
+                  = f.label :remember_me, "Eingeloggt bleiben?"
+                %td
+                  = f.check_box :remember_me
+                %td
+
+        = f.button "Einloggen", :class => "btn btn-large btn-primary"
+.row        
+  %hr
+  = render :partial => "devise/shared/links"
+.row
+  %hr
+  = render :partial => "shared/ads_large_rectangle"

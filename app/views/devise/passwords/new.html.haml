@@ -1,0 +1,33 @@
+- noindex
+.container
+  .row
+    .span
+      %h2 Passwort vergessen?
+      .well
+        %p
+          Wir schicken Dir ein Link per E-Mail zu, um Dein Passwort zurück zu setzen. Wir versenden keine Passwörter - können wir auch gar nicht, da wir sie aus Sicherheitsgründen nicht im Klartext speichern.
+      %p      
+        = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+          = devise_error_messages!
+
+          %fieldset.last
+            %legend Passwort zurücksetzen
+            %table.formtable
+              %tbody
+                %tr
+                  %th
+                    = f.label :email, "E-Mailadresse mit der Du registriert bist"
+                  %td
+                    = f.text_field :email, :class => "textfield"
+                  %td
+
+          %table.formtablesubmit
+            %tbody
+              %tr
+                %th
+                %td
+                  = f.submit "Passwort-Zurücksetzen zuschicken",  :class => "btn btn-large btn-primary"
+                %td
+        = render :partial => "devise/shared/links"
+
+

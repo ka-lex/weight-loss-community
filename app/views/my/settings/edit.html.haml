@@ -1,0 +1,49 @@
+#content
+  #main-wrapper
+    %h2 Einstellungen der Privatsphäre
+
+    = form_for [:my, @setting]  do |f|
+
+      - if @setting.errors.any?
+        #error_explanation
+          %h2
+            = @setting.errors.count
+            prohibited this target from being saved:
+
+          %ul
+            - @setting.errors.full_messages.each do |msg|
+              %li
+                = msg
+
+
+      %fieldset.last
+        %legend aktuelle Einstellung
+        %table.formtable
+          %tbody
+            %tr
+              %th
+                = f.label :show_page, 'Meine Seite im Internet freigeben?'
+              %td
+                = f.check_box :show_page
+              %td
+            %tr
+              %th
+                = f.label :show_weight, 'Mein Gewicht auf meiner öffentlichen Seite anzeigen?'
+              %td
+                = f.check_box :show_weight
+              %td
+            %tr
+              %th
+                = f.label :show_target, 'Mein Zielgewicht anzeigen?'
+              %td
+                = f.check_box :show_target
+              %td
+
+
+        %table.formtablesubmit
+          %tbody
+            %tr
+              %th                
+              %td
+                = f.submit "Einstellungen speichern" , :class => "btn btn-primary"
+              %td

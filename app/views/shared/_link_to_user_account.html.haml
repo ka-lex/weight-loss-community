@@ -1,0 +1,4 @@
+- if user.friend_with? current_user
+  = link_to user.username, my_supporter_path(user)
+- else
+  = link_to user.username, all_supporter_path(user)

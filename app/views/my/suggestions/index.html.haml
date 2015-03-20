@@ -1,0 +1,98 @@
+#content
+  #main-wrapper
+    %h2 Tipps rund ums Abnehmen
+
+    %fieldset.last
+      %legend#my_suggestions_opener
+        = link_to "Deine Tipps ▼", '#'
+      %ul
+        - @my_suggestions.each do |tip|
+          %li
+            %strong
+              = link_to my_suggestion_path(tip) do
+                "
+                = tip.text
+                "
+            %span
+              (
+              %i.icon-thumbs-up
+              = tip.good_votings
+              %i.icon-thumbs-down
+              = tip.bad_votings
+              )
+
+        #my_suggestions_close
+          = link_to "verstecken", '#'
+
+    %h2 Mein Tipp
+    %p
+      Tipp zum Abnehmen:
+      = form_for [:my, @suggestion] do |f|
+        = f.text_field :text, :class => "wide_textfield"
+        = f.submit "Tipp einreichen", :onClick => ("_gaq.push(['_trackEvent', 'Empfehlung', 'New Suggestions', '" + @user.friendly_id + "']);"), :class => "btn btn-primary"
+
+    %fieldset.last
+      %legend
+        alle Tipps      
+      %ul
+        - @all_suggestions.each do |tip|
+          %li
+            %strong
+              = link_to my_suggestion_path(tip) do
+                "
+                = tip.text
+                "
+            %span
+              (
+              %i.icon-thumbs-up
+              = tip.good_votings
+              %i.icon-thumbs-down
+              = tip.bad_votings
+              )
+            %span
+              Dein Voting:
+              - voting = tip.voting_from_user current_user
+              - if voting
+                - if voting.vote == "good"
+                  %i.icon-thumbs-up
+                - if voting.vote == "bad" 
+                  %i.icon-thumbs-down
+              %p
+                - if voting
+                  = form_for([:my, tip, voting]) do |f|
+                    = f.hidden_field :vote, :value => 'good'
+                    - if voting && voting.vote == "good"
+                      = button_tag (:disabled => true, :class => "btn btn-small") do
+                        %i.icon-thumbs-up
+                        guter Tipp
+                    - else
+                      = button_tag :class => "btn btn-small" do
+                        %i.icon-thumbs-up
+                        guter Tipp
+
+   
+                  = form_for([:my, tip, voting]) do |f|
+                    = f.hidden_field :vote, :value => 'bad'
+                    - if voting && voting.vote == "bad"
+                      = button_tag :disabled => true, :class => "btn btn-small" do
+                        %i.icon-thumbs-down
+                        gefällt nicht
+                    -else
+                      = button_tag :class => "btn btn-small" do
+                        %i.icon-thumbs-down
+                        gefällt nicht
+                - else # voting is new, go to create instead of update
+                  = form_for([:my, tip,Voting.new]) do |f|
+                    = f.hidden_field :vote, :value => 'good'
+                    = button_tag :class => "btn btn-small" do
+                      %i.icon-thumbs-up
+                      guter Tipp
+
+   
+                  = form_for([:my, tip,Voting.new]) do |f|
+                    = f.hidden_field :vote, :value => 'bad'
+                    = button_tag :class => "btn btn-small" do
+                      %i.icon-thumbs-down
+                      gefällt nicht
+
+= render '/my/suggestions/suggestion_helper'

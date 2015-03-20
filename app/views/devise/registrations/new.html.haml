@@ -1,0 +1,74 @@
+- title "Registrierung bei der Abnehm-Community"
+- content_for :header do
+  = javascript_include_tag "production"
+.container
+  .row
+    .span
+      %h2 kostenlos Registrieren
+      %p
+        = devise_error_messages!
+      %p
+        Die Registrierung und die gesamte Nutzung alle Features von "nimmt-ab.de" sind kostenlos. Wir finanzieren uns über Werbeeinnahmen. Es werden keine Nahrungsergänzungsmittel oder ähnliches verkauft! Der Abnehm-Effekt gelingt Dir bei uns nur dann, wenn Du regelmäßig Gewichtstagebuch führst, Dich gesund und ausgewogen ernährst und Dich durch Deine Community-Freunde unterstützen lässt.
+
+      = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :validate => true) do |f|
+
+        %fieldset
+          %legend Einfach die folgenden Felder ausfüllen und schon kann's losgehen
+          %table.formtable
+            %tbody
+              %tr
+                %th
+                  = f.label :username, 'Nickname'              
+                %td
+                  = f.text_field :username, :class => "textfield"
+                %td
+
+              %tr
+                %th 
+                  = f.label :email, 'E-Mailadresse'
+                %td 
+                  = f.text_field :email, :class => "textfield"
+                %td
+
+              %tr
+                %th
+                  = f.label :password, "Passwort"
+                %td
+                  = f.password_field :password, :class => "textfield"
+                %td
+
+              - if devise_mapping.rememberable?
+                %tr
+                  %th
+                    = f.label :password_confirmation, 'Passwort wiederholen'
+                  %td
+                    = f.password_field :password_confirmation, :class => "textfield"
+                  %td
+
+              %tr
+                %th
+                  Ich habe die
+                  = link_to("Datenschutzrichtlinie", datenschutz_url)
+                  und
+                  = link_to("Nutzungsbedingungen", nutzungsbedingungen_url)
+                  gelesen und akzeptiere sie.
+                %td
+                  = f.check_box :accepted_term
+                %td
+
+
+          %table.formtablesubmit
+            %tbody
+              %tr
+                %th
+                %td
+                  = f.submit "Registrierung abschicken", :class => "btn btn-large btn-primary"
+                %td
+
+  .row
+    %hr
+    = render :partial => "devise/shared/links"
+  .row
+    %hr
+
+    = render :partial => "shared/ads_large_rectangle"

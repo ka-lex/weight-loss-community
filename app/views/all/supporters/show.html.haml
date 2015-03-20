@@ -1,0 +1,22 @@
+- title "Profil von #{@user.username}" 
+
+- if @user.setting.show_weight?
+  #weights_chart{:style => "width: 750px;height: 300px;"}
+
+#content
+  .wrapper
+    Du kannst #{@user.username} als Unterstützer hinzufügen.
+
+  .wrapper
+    %h2 Ticker
+    - @tickers.each do |ticker|
+      %p.ticker
+        = link_to_user_account ticker.user
+        %strong
+          = ticker.event
+          %i
+            %span#timestamp
+              vor
+              = ticker.since
+
+= render :partial => "/shared/chart", :locals => {:user => @user} if @user.has_target? && @user.has_weight?

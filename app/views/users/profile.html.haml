@@ -1,0 +1,50 @@
+- title "Profil von #{current_user.username}" 
+- content_for :header do
+  = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
+  = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.js"
+  = javascript_include_tag 'rails'
+
+- content_for :tracking do
+  - if (@user.confirmed_at? && @user.confirmed_at.to_date == Date.today)
+    = render 'shared/google_analytics_track_conversion'
+
+= render 'shared/google_adwords_conversion_tracking' if (@user.confirmed_at? && @user.confirmed_at.to_date == Date.today)
+
+#weights_chart{:style => "width: 750px;height: 300px;"}
+
+#content
+  .wrapper
+    = render :partial => "waiting_friend_requests" if @how_many_pending > 0
+    %h2 Status
+    %p
+      Mein Status:
+      = form_for @pinboard_message do |f|
+        = f.hidden_field :from_user_id
+        = f.hidden_field :to_user_id
+        = f.text_field :body, :class => "wide_textfield"
+        = f.submit "Posten", :onClick => ("_gaq.push(['_trackEvent', 'Ticker', 'New Status Message', '" + @user.friendly_id + "']);"), :class => "submit_button"
+
+    %h2 Ticker       
+    - @tickers.each do |ticker|
+      %p.ticker
+        = link_to_user_account ticker.user
+        %strong
+          = ticker.event
+          %i
+            %span#timestamp
+              vor
+              = ticker.since
+
+
+
+    %br.clearall
+
+    = render :partial => "/shared/chart", :locals => {:user => current_user} if current_user.has_target? && current_user.has_weight?
+    
+<script>
+$(function() {
+$( "#info" ).show( "bounce", {}, 500 );
+
+function callback() {};
+});
+</script>

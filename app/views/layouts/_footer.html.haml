@@ -1,0 +1,46 @@
+.container
+  .row
+    .span3
+      %h2 Tipps
+      %ul
+        %li
+          = link_to "schnell und gesund Abnehmen", tipps_schnell_und_gesund_abnehmen_path
+        %li
+          = link_to "Tipps der Community rund ums Abnehmen", mitglieder_tipps_path
+
+    .span3
+      %h2
+        Tour
+      %ul
+        %li
+          = link_to "Ziele", ziele_path
+        %li
+          = link_to "Profil", profil_path
+        %li
+          = link_to "Unterstützer", unterstuetzer_path
+        %li
+          = link_to "Gewichtstagebuch", gewichtstagebuch_path
+
+
+    .span3
+      %h2 Tatsachen
+      %ul
+        %li
+          = link_to "Blog", "http://blog.nimmt-ab.de/"
+        %li
+          = link_to "Macher", macher_url
+        %li
+          = link_to "Impressum", impressum_url
+        %li
+          = link_to "Datenschutz", datenschutz_url, :rel => "nofollow"
+        %li
+          = link_to "Nutzungsbedingungen", nutzungsbedingungen_url, :rel => "nofollow"
+        
+    .span3
+      %h2 Tratsch
+      %ul.social
+        %li
+          = link_to "", "http://www.facebook.com/pages/nimmt-abde/227150427298046", :class => "icons-facebook", :alt => "Fanpage Facebook"
+            
+        %li
+          = link_to "", "https://plus.google.com/117770550496071668013", :class => "icons-google_plus", :alt => "Fanpage Google+"

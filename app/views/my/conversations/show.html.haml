@@ -1,0 +1,39 @@
+#content
+  #main-wrapper
+    %h2 
+      Konversation mit
+      = @other.username
+
+    %fieldset.last
+      %legend
+        Nachrichtenverlauf
+      %table.formtable
+        %tbody
+          - @conversation.messages.each do |message|
+            %tr
+              %th
+                - if message.from == @other
+                  .message_from_other_user
+                    = message.body
+              %td
+              %td
+                - if message.from == @me
+                  .message_from_me
+                    = message.body
+
+
+      %table.formtable
+        %tbody
+          = form_for PrivateMessage.new, :url => {:action => "create"} do |f|
+            %tr
+              %th
+                = hidden_field_tag "private_message[to_user_id]", @other.id
+              %td
+              %td
+                = f.text_area :body, :size => "24x6"
+            %tr
+              %th
+              %td
+              %td
+                = f.submit "Antworten", :class => "btn btn-primary"
+

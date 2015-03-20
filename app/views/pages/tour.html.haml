@@ -1,0 +1,58 @@
+- title "Tour durch die Abnehm-Community"
+.container
+  .jumbotron    
+    %h1 Was erwartet Dich drin?
+    %p.lead
+      Das wichtigste zuerst: nimmt-ab.de ist eine
+      %b Abnehm-Community
+      für alle, die gemeinsam Abnehmen wollen.
+    = link_to "Jetzt registrieren", new_user_registration_url, :class => "btn btn-large btn-success"
+    
+.container
+  .row    
+    = image_tag "profil-big.png", :class => "featurette-image pull-right"
+    %h2.featurette-heading
+      Dein Profil.
+      %span.muted
+        Dein Erfolg.
+    %p.lead      
+      Bei nimmt-ab.de legt ihr Euch ein kostenloses Profil an. Darin könnt ihr Euer Gewicht Tag für Tag festhalten.
+    %p
+      = link_to profil_path do
+        Mehr erfahren über Profile.
+  %hr
+  .row
+    = image_tag "unterstuetzer-big.png", :class => "featurette-image pull-left"
+    %h2.featurette-heading 
+      Unterstützer.
+      %span.muted helfen Dir beim Abnehmen.
+    %p.lead 
+      Und um erfolgreich Abzunehmen lasst Euch von Euren Freunden unterstützen.
+    %p
+    = link_to unterstuetzer_path do
+      Was sind Unterstützer?
+  %hr
+  .row
+    = image_tag "abnehm_ziele-big.png", :class => "featurette-image pull-right"
+    %h2.featurette-heading 
+      Ziele.
+      %span.muted der Weg zum Wunschgewicht.
+    %p.lead 
+      Legt Ziele fest, wieviel ihr abnehmen wollt.
+    %p
+      = link_to ziele_path do
+        Das Zielgewicht im Blick.
+  %hr
+  .row
+    = image_tag "gewichtstagebuch-big.png", :class => "featurette-image pull-left"
+    %h2.featurette-heading 
+      Gewichtstagebuch.
+      %span.muted Kenne die Tatsachen.
+    %p.lead 
+      Halte Dein Gewicht regelmäßig fest, so kannst Du Deine Erfolg sehen.
+    = link_to unterstuetzer_path do
+      Mehr zum Gewichtstagebuch.
+  .row
+    .jumbotron
+      = link_to "Jetzt registrieren", new_user_registration_url, :class => "btn btn-large btn-success"
+  %hr

@@ -1,0 +1,42 @@
+- content_for :header do
+  = javascript_include_tag "application"
+
+#content
+  #main-wrapper
+    %h2
+      = @group.name
+
+    %fieldset.last
+      %legend
+        = @group.name
+      %table.formtable
+        %tbody
+          %tr
+            %th
+              = @group.name
+            %td
+              = @group.description
+            %td
+              - if @group.is_member? current_user
+                - unless @group.owner? current_user
+                  = form_tag({:controller => "/my/group_members", :action => 'destroy'}, :method => 'delete') do
+                    = hidden_field_tag 'group_id', @group.id
+                    = submit_tag 'aus Gruppe austreten', :class => "btn btn-primary"
+              - else
+                = form_tag({:controller => "my/group_members", :action => 'create'}, :method => 'post') do
+                  = hidden_field_tag 'group_id', @group.id
+                  = submit_tag 'Gruppe beitreten', :class => "btn btn-primary"
+
+    %fieldset.last
+      %legend
+        Mitglieder
+        - @group.users.each do |member|
+          %ul
+            %li
+              = link_to_user_account member
+
+    %fieldset.last
+      %legend
+        Kommentare
+
+    = link_to "zurück zu den Gruppen", :back

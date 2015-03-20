@@ -1,0 +1,29 @@
+#content
+  #main-wrapper
+    %h2
+      = @group.name
+    %p#notice
+      = notice
+
+    %fieldset.last
+      %legend
+        Einstellungen der Gruppe
+      %table.formtable
+        %tbody
+          %tr
+            %th
+              = link_to @group.name, @group
+            %td
+              = @group.description
+            %td
+              - if user_signed_in?
+                - if @group.owner? current_user
+                  = link_to 'bearbeiten', edit_my_group_path(@group)
+                  |
+                  = link_to 'löschen', [:my, @group], :confirm => 'Wirklich Gruppe löschen?', :method => :delete
+                - if @group.is_member? current_user
+                  = link_to "austreteten" unless @group.owner? current_user
+                - else
+                  = link_to "eintreten"
+
+    = link_to 'zurück zu meinen Gruppen', my_groups_path

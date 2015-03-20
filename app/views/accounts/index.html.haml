@@ -1,0 +1,41 @@
+- title "Liste der Unterstützer" 
+#content
+  .wrapper
+
+    %h1#headline Liste der Benutzer
+    %h2#intro Hier siehst Du die bereits registrierten Benutzer
+    %p
+      Jeder Nutzer hat seine eigene Seite. Er gibt so viel Informationen über sich Preis, wie er es für richtig hält. Alle Infos über Dich sind in Deinen Einstellungen konfigurierbar.    
+    
+    %p
+      - unless user_signed_in?
+        %i
+          Um andere Nutzer zu Unterstützen oder von ihnen unterstützt zu werden musst Du Dich
+          = link_to "einloggen", new_user_session_url
+          oder
+          = link_to 'registrieren', new_user_registration_url
+          \.
+   
+                 
+
+    %br.clearall
+
+
+
+    %fieldset.last
+      %legend
+        potentielle Unterstützer
+      %table.formtable
+        %tbody
+          - @users.each do |user|
+            %tr
+              %th
+                = link_to user.username, account_path(user)
+              %td
+                - if user_signed_in?
+                 
+                - else
+                  = link_to "Jetzt einloggen", new_user_session_url
+                  oder
+                  = link_to 'Registrieren', new_user_registration_url
+              %td

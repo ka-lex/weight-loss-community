@@ -1,0 +1,35 @@
+- content_for :header do
+  = javascript_include_tag "production"
+
+#content
+  #main-wrapper
+    %h2 alle Gruppen
+
+    %fieldset.last
+      %legend
+        alle Gruppen der Community
+      %table.formtable
+        %tbody
+          - @groups.each do |group|
+            %tr
+              %th
+                = link_to group.name, group
+              %td
+                = group.description
+              %td
+                - if user_signed_in?
+                  - if group.owner? current_user
+                    = link_to 'bearbeiten', edit_my_group_path(group)
+                    |
+                    = link_to 'löschen', [:my, group], :confirm => 'Wirklich Gruppe löschen?', :method => :delete
+                  - if group.is_member? current_user
+                    - unless group.owner? current_user
+                      = form_tag({:controller => "/my/group_members", :action => 'destroy'}, :method => 'delete') do
+                        = hidden_field_tag 'group_id', group.id
+                        = submit_tag 'aus Gruppe austreten', :class => "submit_button"
+                  - else
+                    = form_tag({:controller => "my/group_members", :action => 'create'}, :method => 'post') do
+                      = hidden_field_tag 'group_id', group.id
+                      = submit_tag 'Gruppe beitreten', :class => "submit_button"
+    
+    = link_to 'Neue Gruppe anlegen', new_my_group_path

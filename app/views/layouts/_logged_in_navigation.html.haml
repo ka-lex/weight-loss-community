@@ -1,0 +1,19 @@
+%ul.nav.pull-right
+  %li
+    = link_to current_user.username, my_userprofile_url #TOBEEDITED
+  %li.dropdown
+    %a.dropdown-toggle{"data-toggle" => "dropdown", "href" => "#"}
+      Einstellungen
+      %b.caret
+    %ul.dropdown-menu    
+      %li
+        = link_to "persönliche Daten", edit_my_account_path
+      %li
+        = link_to "Privatsphäre", edit_my_setting_path
+      %li
+        = link_to "Zugangsdaten",edit_user_registration_url
+      %li.divider
+      %li
+        = link_to "öffentliches Profil", account_url(current_user)
+  %li
+    = link_to "Ausloggen", destroy_user_session_url

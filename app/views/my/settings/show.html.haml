@@ -1,0 +1,40 @@
+#content
+  #main-wrapper
+    %h2 Einstellungen der Privatsphäre
+
+    %fieldset.last
+      %legend aktuelle Einstellung
+      %table.formtable
+        %tbody
+          %tr
+            %th
+              Meine Seite im Internet freigeben
+            %td
+              = @setting.show_page?
+            %td
+          %tr
+            %th
+              Mein Gewicht auf meiner öffentlichen Seite anzeigen?
+            %td
+              = @setting.show_weight?
+            %td
+          %tr
+            %th
+              Mein Zielgewicht anzeigen?
+            %td
+              = @setting.show_target?
+            %td
+
+          %tr
+            %th
+              Mein Gewichtsverlust anzeigen?
+            %td
+              = @setting.show_weight_loss?
+            %td
+
+      = link_to "Bearbeiten", edit_my_setting_path
+
+
+
+
+    = link_to 'Zurück', root_path

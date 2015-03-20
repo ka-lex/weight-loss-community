@@ -1,0 +1,48 @@
+- title "Profil in der Abnehm-Community"
+- content_for :header do
+  = render "/shared/jquery_tools_overlay"
+
+.container
+  .jumbotron
+    %h1 Lege Dein Profil an
+    = image_tag 'profil.png', :alt => "Tour > Profil"
+    %p
+      Um den Abnehm-Erfolg messen zu können legst Du ein kostenloses Profil an. Hier kannst Du auf Deiner Seite den Gewichtsverlauf eintragen und als Diagramm Deinen Erfolg beobachten. Du kannst Dein Wunschgewicht als Ziel eintragen und siehst immer den Weg zum Ziel vor Augen. Trage Notizen in Dein perönliches Gewichtstagebuch ein, so kannst Du immer die Gründe für Gewichtsschwankungen nachvollziehen. Zusätzlich kannst Du Dich von anderen bei Deinem Abnehm-Vorhaben untersützen lassen - oder selbst andere unterstützen. Gemeinsam Abnehmen ist einfach einfacher.
+
+    #triggers
+      = image_tag "tour/screenshot_profil_gewichtstagebuch_small.png", :rel => "#photo1",:onClick => ("_gaq.push(['_trackEvent', 'Tour', 'Profil', 'Screenshot_1']);")
+
+    = render "register_button"
+
+    %hr
+    %row
+      %p.pull-left
+        = link_to unterstuetzer_path do
+          = image_tag "tour/links.png"
+          Unterstützer
+        vorheriger Tourpunkt
+
+      %p.pull-right
+        nächster Tourpunkt:
+        = link_to ziele_path do
+          Ziele
+          = image_tag "tour/rechts.png"
+
+
+        
+    
+    <!-- overlayed element -->
+    #photo1.apple_overlay
+      = image_tag "tour/screenshot_profil_gewichtstagebuch_medium.png"
+
+      .details
+        %h2 Screenshot Profil
+
+        %p
+          In Deinem Profil kannst Du Ziele festlegen, Dein Gewicht protokollieren und Dich mit Deinen Unterstützern vernetzen.
+
+<script>
+$(document).ready(function() {
+$("#triggers img[rel]").overlay({effect: 'apple'});
+});
+</script>

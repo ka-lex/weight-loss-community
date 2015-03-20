@@ -1,0 +1,51 @@
+.row
+  .span
+    %h2 persönliche Daten
+    = form_for([:my,@account], :url => my_account_path, :method => "PUT", :html => {:class => "form-horizontal"}) do |f|
+
+      - if @account.errors.any?
+        #error_explanation
+          %h2
+            = @account.errors.count
+            folgende(r) Fehler verhinderte das Speichern:
+
+          %ul
+            - @account.errors.full_messages.each do |msg|
+              %li
+                = msg
+      
+      .control-group          
+        = f.label :zipcode, 'Postleitzahl', :class => "control-label"
+        .controls
+          = f.text_field :zipcode
+        %span.help-block
+          %span.text-success
+            Die Postleitzahl wird nicht öffentlich angezeigt. Sie dient ledglich der Auffindung Gleichgesinnter in Deiner Umgebung.
+      .control-group        
+        = f.label :sex, 'Geschlecht', :class => "control-label"
+        .controls
+          = f.radio_button(:sex, "w")
+          weiblich
+          = f.radio_button(:sex, "m")
+          männlich
+        %span.help-block
+          %span.text-success
+            Dein Geschlecht wird für die Berechnung des BMI benötigt.
+      .control-group
+        = f.label :size, 'Größe (in cm)', :class => "control-label"
+        .controls
+          = f.text_field :size, :class => "textfield"
+        %span.help-block
+          %span.text-success
+            Die Größe wird ebenfalls zu Berechnung des BMI benötigt.
+
+
+      .control-group
+        .controls
+          = f.submit "Einstellungen speichern", :class => "btn btn-primary"        
+
+    %h3 weitere Konfigurationen
+    %p 
+      = link_to "Zugangsdaten ändern", edit_user_registration_url
+    %p
+      = link_to "Privatsphären-Einstellungen", edit_my_setting_path

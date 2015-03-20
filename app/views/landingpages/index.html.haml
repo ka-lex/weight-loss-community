@@ -1,0 +1,77 @@
+- content_for :header do
+  = render "/shared/google_plus_fanpage_header"
+#splash
+  .wrapper
+    #screenshot
+      %h1#headline Gemeinsam abnehmen ist einfacher
+      #copy
+        %h2#intro Nutze Deinen Bekanntenkreis, um die Pfunde purzeln zu lassen.
+        %p
+          Abnehmen an sich ist schwer genug. Mach es Dir einfacher und lass Dir von Deinen Freunden helfen.
+        
+        = link_to new_user_registration_url do
+          .register_button
+            %span
+              Jetzt Registrieren
+#content
+
+  .wrapper
+
+    .onecolumn
+      %h2#collect Unterstützer
+      = image_tag 'unterstuetzer.png'
+      %p
+        Alleine Abnehmem ist nicht einfach. Daher kannst Du Dir Unterstützer suchen, Dir Dir beim Abnehmen helfen. Lade Deine Freunde ein um Dich beim Erreichen Deiner Ziele zu unterstützen.
+        = link_to "Meine Unterstützer hinzufügen", accounts_path
+        oder
+        = link_to "mehr über Unterstützer erfahren", unterstuetzer_path
+
+    .onecolumn
+      %h2#collect Ziele
+      = image_tag 'abnehm_ziele.png'
+      %p
+        Persönliche Ziele helfen, Dein Wunschgewicht zu erreichen. Lege gleich ein Ziel an und starte Deine Diät jetzt.
+        = link_to "Ziele kennenlernen", ziele_path
+
+    .onecolumn.last
+      %h2#collect Gewichtstagebuch
+      = image_tag 'gewichtstagebuch.png'
+      %p
+        Um Dein Gewicht im Blick zu haben kannst Du Dein persönliches Gewichtstagebuch anlegen. So kannst Du Dein Gewichtsverlust als Diagramm beobachten.
+        = link_to "Mein Gewichtstagebuch", gewichtstagebuch_path
+
+    %br.clearall
+
+    .onecolumn
+      %h2#collect
+        Profil
+      = image_tag 'profil.png'
+      %p
+        Um Dein Gewicht im Blick zu haben kannst Du Dein persönliches Profil anlegen.
+        = link_to "Mein Profil erstellen", new_user_registration_url
+        oder
+        = link_to "mehr über Dein Profil erfahren", profil_path
+
+    .onecolumn
+      %h2#collect
+        Tour
+      = image_tag 'tour.png'
+      %p
+        Lerne "nimmt-ab.de" besser kennen und erfahre mehr über die einzelnen
+        = link_to "Features in der Tour", tour_path
+
+    .onecolumn.last
+      %h2#collect Änderungsticker
+      = image_tag 'ticker.png'
+      %p
+        Bleibe auf dem Laufenden. Alles was bei nimmt-ab.de geschicht im
+        = link_to "Ticker", ticker_path
+
+#social
+  #fb
+    = render "/shared/facebook_fanpage"
+  #gp
+    = render "/shared/google_plus_fanpage"
+  #gpp
+    %span#gplusone
+      <g:plusone></g:plusone>

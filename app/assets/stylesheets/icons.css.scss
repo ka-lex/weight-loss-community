@@ -1,0 +1,28 @@
+@import "icons/*.png";
+@include all-icons-sprites;
+
+.social {
+  li {
+    float: right;
+    padding: 0px 5px 0px;
+  }
+  a {
+    display: block;
+    width: 64px;
+    height: 64px;
+  }
+}
+
+.icon {
+  padding: 0px 2px 0px;
+  a {
+    padding: 0px 2px 0px;
+    float: left;
+    display: block;
+    width: 64px;
+    height: 64px;
+  } 
+  a:hover {
+    background-color: transparent;
+  }
+}

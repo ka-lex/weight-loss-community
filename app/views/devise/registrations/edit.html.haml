@@ -1,0 +1,82 @@
+- noindex
+- content_for :header do
+  = javascript_include_tag "application"
+
+#content
+  #main-wrapper
+    %h2
+      Zugangsdaten bearbeiten
+
+    %h3 
+      Persönliche Daten in 
+      = link_to "meinem Account ändern ", edit_my_account_path
+      (Größe, Alter, ...)      
+
+    %p
+      = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+
+        = devise_error_messages!
+
+        %fieldset.last
+          %legend Zugangsdaten
+          %table.formtable
+            %tbody
+              %tr
+                %th
+                  = f.label :username, 'Nickname'
+                  - if current_user.username.nil?
+                    %i (wird in der Profil-URL genutzt, beispielsweise peter.nimmt-ab.de)
+                    -else
+                    %i (nicht änderbar)
+                %td
+                  - if current_user.username.nil?
+                    = f.text_field :username, :class => "textfield"
+                    - else
+                    = f.text_field :username, :class => "textfield", :disabled => true
+                %td
+
+              %tr
+                %th
+                  = f.label :email, 'E-Mailadresse'
+                %td
+                  = f.text_field :email, :class => "textfield"
+                %td
+              %tr
+                %th
+                  = f.label :password, 'Passwort'
+                  <i>(leer lassen, wenn es nicht geändert werden soll)</i>
+                %td
+                  = f.password_field :password, :class => "textfield"
+                %td
+              %tr
+                %th
+                  = f.label :password_confirmation, 'Passwort wiederholen'
+                %td
+                  = f.password_field :password_confirmation, :class => "textfield"
+                %td
+              %tr
+                %th
+                  = f.label :current_password, 'aktuelles Passwort'
+                  <i>(aktuelles Passwort zur Bestätigung eingeben)</i><br />
+                %td
+                  = f.password_field :current_password, :class => "textfield"
+                %td
+        %table.formtablesubmit
+          %tbody
+            %tr
+              %th
+              %td
+                = f.submit "Daten aktualisieren", :class => "btn btn-primary"
+              %td      
+      
+      %h3
+        Einstellungen der öffentlichen Seite (Privatsphäre)
+      %p
+        Einstellungen zu 
+        = link_to "Privatsphäre ansehen / bearbeiten", edit_my_setting_path
+      %h3
+        Account löschen
+      %p
+        nicht glücklich?
+        = link_to "Account endgülitg löschen", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete
+        %i (Daten können nicht wiederhergestellt werden.)      

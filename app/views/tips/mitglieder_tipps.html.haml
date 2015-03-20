@@ -1,0 +1,27 @@
+- title "Abnehm-Tipps der Community"
+#content
+  .wrapper
+    %h1 Tipps zum Abnehmen der Community-Mitglieder
+    %p
+      Die hier aufgelisteten Tipps stammen direkt aus der Community. Sie werden allen Mitglieder zur Abstimmung gestellt.
+    %h2 Mitglieder-Tipps
+
+    
+    - @tips.each do |tip|
+      #tipps-shell
+        .tipp
+          .tipp-inner
+            .ratings
+              .ratings-up
+                %a.rate{"href"=>"#"}
+                  %span.count
+                    = tip.good_votings
+              .ratings-down
+                %a.rate{"href"=>"#"}
+                  %span.count
+                    = tip.bad_votings
+              .clear-both
+            %strong
+              "
+              = tip.text
+              "

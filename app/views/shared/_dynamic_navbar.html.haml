@@ -1,0 +1,32 @@
+.navbar.navbar-fixed-top.navbar-inverse
+  .navbar-inner
+    - unless user_signed_in?
+      .container
+        %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to root_url, :class => 'brand' do
+        = image_tag "background_logo.png", :alt =>  "Abnehmen in der Community: nimmt-ab.de"
+      
+      .container.nav-collapse
+        - unless user_signed_in?
+          = render "layouts/logged_out_navigation"
+        - else
+          = render "layouts/logged_in_navigation"
+    - else
+      .container-fluid
+      
+      %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to root_url, :class => 'brand' do
+        = image_tag "background_logo.png", :alt =>  "Abnehmen in der Community: nimmt-ab.de"
+      
+      .container.nav-collapse
+        - unless user_signed_in?
+          = render "layouts/logged_out_navigation"
+        - else
+          = render "layouts/logged_in_navigation"
+        

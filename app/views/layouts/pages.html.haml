@@ -1,0 +1,29 @@
+!!! XML
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "de", :lang => "de"}
+  %head
+    %title 
+      = @title || "Gemeinsam Abnehmen"
+    = stylesheet_link_tag "application", :media => "all"
+    = yield :header
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    = csrf_meta_tag    
+    = canonical_link    
+  %body
+    #wrap
+      = render "shared/static_outside_navbar"    
+      .container       
+        .row
+          .span2            
+            = render "/shared/ads_lef_wideskyscraper"
+          .span7
+            .container
+              = render "/shared/ads_leaderboard"
+            = yield          
+              
+      #push
+    %footer
+      = render "/layouts/footer"
+          
+    .tracking
+      = render :partial => "/layouts/google_analytics"

@@ -1,0 +1,34 @@
+#content
+  #main-wrapper
+    %h2 mein BMI
+
+    %fieldset.last
+      %legend
+        errechneter BMI
+      #bmi
+        #bmi_inner
+          BMI
+          %span
+            - if current_account && current_account.size.nil?
+              Bitte Größe eintragen
+            - else
+              = current_user.bmi
+
+    = render :partial => "form" if (current_account && current_account.size.nil?)
+
+    - if @user.account.nil?
+      = link_to "zur Errechnung des BMI bitte zuerst Geschlecht und Körpergröße eintragen", edit_my_account_path
+
+    
+    %h2 Einstufung
+    #bmi_rating
+      - if current_account && current_account.sex.nil?
+        Um die Einstufung berechnen zu können musst Du Dein Geschlecht eintragen
+        = render :partial => "sex_form"
+      - else
+        Bewertung:
+        %span
+          = Bmi.rating current_account.sex, current_user.bmi if current_account
+
+
+= link_to 'Zurück', root_path

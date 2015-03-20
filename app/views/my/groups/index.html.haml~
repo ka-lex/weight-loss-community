@@ -1,0 +1,28 @@
+#content
+  #main-wrapper
+    %h2 meine Gruppen
+    %p#notice
+      = notice
+
+    %fieldset.last
+      %legend
+        alle Gruppen in denen ich bin:
+      %table.formtable
+        %tbody
+          - @groups.each do |group|
+            %tr
+              %th
+                = link_to group.name, [:my, group]
+              %td
+                = group.description
+              %td
+                - if group.owner? current_user
+                  = link_to 'bearbeiten', edit_my_group_path(group)
+                  |
+                  = link_to 'löschen', [:my,group], :confirm => 'Wirklich Gruppe löschen?', :method => :delete
+                - else
+                  = link_to "austreten"
+
+    
+    = link_to 'Neue Gruppe anlegen', new_my_group_path
+    = link_to 'Zurück', root_path

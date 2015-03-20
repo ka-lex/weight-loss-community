@@ -1,0 +1,5 @@
+<p>Hallo <%= @resource.email %>!</p>
+
+<p>Bitte aktiviere Deinen Account für <%= link_to 'www.nimmt-ab.de', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %> mit folgendem Link:</p>
+
+<p><%= link_to 'Meinen Account bestätigen', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
